@@ -23,8 +23,8 @@
 
 @interface MyShopCartContr ()<UITableViewDelegate,UITableViewDataSource>
 {
-    BOOL CartGoodsState[1000][1000];
-    BOOL CartSectionState[1000];
+    BOOL CartGoodsState[1000][1000];//存每个商品勾选状态
+    BOOL CartSectionState[1000];//存每个店铺勾选状态
 }
 @property (weak, nonatomic) IBOutlet UITableView *carTableView;
 @property (weak, nonatomic) IBOutlet SelectButton *selectAllButton;
@@ -45,6 +45,7 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.title=@"购物车";
 //    [self initData];
 //    CartGoodsState[1][0]=true;
 //    if (CartGoodsState[2][0]==false) {
@@ -204,6 +205,7 @@
                                               
                                               [SVProgressHUD dismiss];
                                               [self.carTableView reloadData];
+                                              [self calculatePriceAndTotalCount];
                                               
                                           } else {
                                               [SVProgressHUD showErrorWithStatus:k_Error_WebViewError];
@@ -276,7 +278,7 @@
                                           ShopCartReturnData *data=[ShopCartReturnData mj_objectWithKeyValues:jsonDic];
                                           if (data.Success) {
                                                                                            [SVProgressHUD dismiss];
-                                              button.countTextField.text=[NSString stringWithFormat:@"%d",count];
+                                              [self getCartGoodsInfoFromNetwork];
                                               
                                           } else {
                                               [SVProgressHUD showErrorWithStatus:k_Error_WebViewError];

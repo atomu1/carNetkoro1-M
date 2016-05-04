@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9060" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ProductDetailContr">
+            <connections>
+                <outlet property="scrollView" destination="rk0-yj-oy1" id="ZQj-Xx-dji"/>
+                <outlet property="segmentControl" destination="q6r-Dc-iFz" id="s0P-eA-9S0"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="q6r-Dc-iFz">
+                    <rect key="frame" x="-60" y="-14" width="121" height="29"/>
+                    <color key="backgroundColor" red="0.85769164360000005" green="0.85769164360000005" blue="0.85769164360000005" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="30" id="EOt-s8-eP0"/>
+                    </constraints>
+                    <segments>
+                        <segment title="图文详情"/>
+                        <segment title="商品参数"/>
+                        <segment title="商品评价"/>
+                    </segments>
+                    <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="EOt-s8-eP0"/>
+                        </mask>
+                    </variation>
+                    <variation key="widthClass=compact">
+                        <mask key="constraints">
+                            <include reference="EOt-s8-eP0"/>
+                        </mask>
+                    </variation>
+                </segmentedControl>
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" tag="3" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rk0-yj-oy1">
+                    <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                </scrollView>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="rk0-yj-oy1" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="0Gs-B7-Cys"/>
+                <constraint firstItem="q6r-Dc-iFz" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="BJy-bE-kp2"/>
+                <constraint firstItem="rk0-yj-oy1" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="30" id="G8C-HV-Sfz"/>
+                <constraint firstItem="q6r-Dc-iFz" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="NGf-b8-Ist"/>
+                <constraint firstAttribute="trailing" secondItem="rk0-yj-oy1" secondAttribute="trailing" id="YO3-2A-IdV"/>
+                <constraint firstAttribute="bottom" secondItem="rk0-yj-oy1" secondAttribute="bottom" id="fat-D9-M0S"/>
+                <constraint firstAttribute="trailing" secondItem="q6r-Dc-iFz" secondAttribute="trailing" id="g3z-cZ-rni"/>
+            </constraints>
+            <variation key="default">
+                <mask key="subviews">
+                    <exclude reference="q6r-Dc-iFz"/>
+                    <exclude reference="rk0-yj-oy1"/>
+                </mask>
+                <mask key="constraints">
+                    <exclude reference="BJy-bE-kp2"/>
+                    <exclude reference="NGf-b8-Ist"/>
+                    <exclude reference="g3z-cZ-rni"/>
+                    <exclude reference="0Gs-B7-Cys"/>
+                    <exclude reference="G8C-HV-Sfz"/>
+                    <exclude reference="YO3-2A-IdV"/>
+                    <exclude reference="fat-D9-M0S"/>
+                </mask>
+            </variation>
+            <variation key="widthClass=compact">
+                <mask key="subviews">
+                    <include reference="q6r-Dc-iFz"/>
+                    <include reference="rk0-yj-oy1"/>
+                </mask>
+                <mask key="constraints">
+                    <include reference="BJy-bE-kp2"/>
+                    <include reference="NGf-b8-Ist"/>
+                    <include reference="g3z-cZ-rni"/>
+                    <include reference="0Gs-B7-Cys"/>
+                    <include reference="G8C-HV-Sfz"/>
+                    <include reference="YO3-2A-IdV"/>
+                    <include reference="fat-D9-M0S"/>
+                </mask>
+            </variation>
+            <point key="canvasLocation" x="215" y="314"/>
+        </view>
+    </objects>
+</document>

@@ -13,3 +13,4 @@ pod 'TSMessages',   '~> 0.9.10' #顶部通知
 pod 'ActionSheetPicker-3.0',    '~> 1.2.0'  #PickerView
 pod 'BaiduMapKit'               #百度地图SDK
 
+pod 'SDCycleScrollView','~> 1.61' #图片轮播

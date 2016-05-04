@@ -14,12 +14,16 @@
 #import "AddressJSONModel.h"
 #import "MJYUtils.h"
 #import "BaseHeader.h"
+#import "WXApi.h"
+#import <ShareSDK/ShareSDK.h>
+#import "MacroNotification.h"
+#import "UIViewController+WeChatAndAliPayMethod.h"
 #import "JPUSHService.h"
 #import "CeShiViewController.h"
 #import "ReleaseMainOrderViewController.h"
 
 @interface AppDelegate ()<
-CLLocationManagerDelegate
+CLLocationManagerDelegate,WXApiDelegate
 >{
     
     CLLocationManager *locationManager;
@@ -245,7 +249,7 @@ CLLocationManagerDelegate
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    
+    [WXApi registerApp:APP_ID withDescription:@"demo 2.0"];
     /**
      * 初始化首页(tabbarVC)
      */
@@ -346,6 +350,48 @@ CLLocationManagerDelegate
     }
     [application setApplicationIconBadgeNumber:0];
     [JPUSHService handleRemoteNotification:userInfo];
+}
+- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<NSString*, id> *)options {
+    /*
+     9000 订单支付成功
+     8000 正在处理中
+     4000 订单支付失败
+     6001 用户中途取消
+     6002 网络连接出错
+     */
+    //如果极简开发包不可用,会跳转支付宝钱包进行支付,需要将支付宝钱包的支付结果回传给开 发包
+    if ([url.host isEqualToString:@"safepay"])
+    {
+        
+        [[AlipaySDK defaultService] processOrderWithPaymentResult:url
+                                                  standbyCallback:^(NSDictionary *resultDic) {
+                                                      NSLog(@"result = %@",resultDic);
+                                                  }];
+        
+    }
+    
+    if ([url.host isEqualToString:@"platformapi"])
+    {//支付宝钱包快登授权返回 authCode
+        [[AlipaySDK defaultService] processAuthResult:url standbyCallback:^(NSDictionary *resultDic)
+         {
+             NSLog(@"result = %@",resultDic);
+         }];
+    }
+    if ([[NSString stringWithFormat:@"%@",url] rangeOfString:[NSString stringWithFormat:@"%@://pay",APP_ID]].location != NSNotFound) {
+        return  [WXApi handleOpenURL:url delegate:self];
+    }else{
+        return [ShareSDK handleOpenURL:url
+                            wxDelegate:self];
+    }
+    return YES;
+    
+    
+}
+- (BOOL)application:(UIApplication *)application
+            openURL:(NSURL *)url
+  sourceApplication:(NSString *)sourceApplication
+         annotation:(id)annotation {
+    return YES;
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {

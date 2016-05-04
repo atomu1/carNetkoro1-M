@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9060" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
+        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
         <!--商城-->
@@ -16,22 +17,131 @@
                     <view key="view" contentMode="scaleToFill" id="U3Q-XV-9h3">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="商城" id="sbH-3v-07Y"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="agL-By-qbs" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="552" y="268"/>
+            <point key="canvasLocation" x="552" y="328"/>
+        </scene>
+        <!--Chose Spare Parts View Controller-->
+        <scene sceneID="Yjj-vd-05r">
+            <objects>
+                <viewController storyboardIdentifier="ChoseSparePartsViewController" id="8Db-In-dU2" customClass="ChoseSparePartsViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="dAj-0D-bA6"/>
+                        <viewControllerLayoutGuide type="bottom" id="PpN-HX-HS6"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Ai4-FG-m6E">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7gC-tE-X5H">
+                                <rect key="frame" x="0.0" y="0.0" width="159" height="40"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="hGs-28-2nt"/>
+                                </constraints>
+                                <state key="normal" title="地区">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="districtAction:" destination="8Db-In-dU2" eventType="touchUpInside" id="1Ik-Jr-JMz"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ed1-V5-j71">
+                                <rect key="frame" x="8" y="45" width="150" height="40"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="150" id="Tof-bA-PnU"/>
+                                    <constraint firstAttribute="height" constant="40" id="qSL-gW-nS0"/>
+                                </constraints>
+                                <state key="normal" title="品牌车型">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="carBrandAction:" destination="8Db-In-dU2" eventType="touchUpInside" id="4z6-5p-GqM"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RzO-9d-lvI">
+                                <rect key="frame" x="161" y="0.0" width="159" height="40"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="X1n-S6-TJu"/>
+                                </constraints>
+                                <state key="normal" title="排序">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="sortAction:" destination="8Db-In-dU2" eventType="touchUpInside" id="6Xb-SD-Tgo"/>
+                                </connections>
+                            </button>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="UZa-H2-Y1k">
+                                <rect key="frame" x="0.0" y="90" width="320" height="478"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="8Db-In-dU2" id="PmP-Fq-oGZ"/>
+                                    <outlet property="delegate" destination="8Db-In-dU2" id="O7o-55-k5x"/>
+                                </connections>
+                            </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jcV-mS-2Sk">
+                                <rect key="frame" x="161" y="45" width="147" height="40"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="H3Z-7q-K2E"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="MkK-ZX-mqa"/>
+                                    <constraint firstAttribute="width" constant="147" id="VNb-nt-VMP"/>
+                                </constraints>
+                                <state key="normal" title="自动变速箱修理包">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="repairKitAction:" destination="8Db-In-dU2" eventType="touchUpInside" id="84p-J4-yqm"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="0.96470588239999999" green="0.96470588239999999" blue="0.99607843139999996" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="jcV-mS-2Sk" firstAttribute="leading" secondItem="ed1-V5-j71" secondAttribute="trailing" constant="3" id="3zD-Hd-DTS"/>
+                            <constraint firstAttribute="trailing" secondItem="UZa-H2-Y1k" secondAttribute="trailing" id="4Kx-6h-y2d"/>
+                            <constraint firstItem="UZa-H2-Y1k" firstAttribute="top" secondItem="jcV-mS-2Sk" secondAttribute="bottom" constant="5" id="Q55-ai-LGL"/>
+                            <constraint firstItem="jcV-mS-2Sk" firstAttribute="top" secondItem="RzO-9d-lvI" secondAttribute="bottom" constant="5" id="RLs-Tz-heL"/>
+                            <constraint firstItem="RzO-9d-lvI" firstAttribute="top" secondItem="dAj-0D-bA6" secondAttribute="bottom" id="UlH-uX-kc3"/>
+                            <constraint firstItem="PpN-HX-HS6" firstAttribute="top" secondItem="UZa-H2-Y1k" secondAttribute="bottom" id="W7S-Dx-PAx"/>
+                            <constraint firstItem="7gC-tE-X5H" firstAttribute="top" secondItem="dAj-0D-bA6" secondAttribute="bottom" id="aeb-LN-6qw"/>
+                            <constraint firstItem="RzO-9d-lvI" firstAttribute="leading" secondItem="Ai4-FG-m6E" secondAttribute="centerX" constant="1" id="bxn-vI-e9l"/>
+                            <constraint firstItem="ed1-V5-j71" firstAttribute="top" secondItem="7gC-tE-X5H" secondAttribute="bottom" constant="5" id="eQl-X5-b67"/>
+                            <constraint firstItem="7gC-tE-X5H" firstAttribute="leading" secondItem="Ai4-FG-m6E" secondAttribute="leading" id="hkU-uy-Cer"/>
+                            <constraint firstItem="7gC-tE-X5H" firstAttribute="trailing" secondItem="Ai4-FG-m6E" secondAttribute="centerX" constant="-1" id="p2Z-kT-tNw"/>
+                            <constraint firstAttribute="trailing" secondItem="RzO-9d-lvI" secondAttribute="trailing" id="qWL-W7-EOf"/>
+                            <constraint firstItem="UZa-H2-Y1k" firstAttribute="leading" secondItem="Ai4-FG-m6E" secondAttribute="leading" id="v0E-P8-6hY"/>
+                            <constraint firstItem="ed1-V5-j71" firstAttribute="trailing" secondItem="Ai4-FG-m6E" secondAttribute="centerX" constant="-2" id="ySE-U7-OpP"/>
+                        </constraints>
+                    </view>
+                    <nil key="simulatedStatusBarMetrics"/>
+                    <connections>
+                        <outlet property="careTypeButton" destination="ed1-V5-j71" id="2S5-XL-UpL"/>
+                        <outlet property="districtButton" destination="7gC-tE-X5H" id="yHD-We-ywF"/>
+                        <outlet property="repairBagButton" destination="jcV-mS-2Sk" id="vi9-9a-suf"/>
+                        <outlet property="sortButton" destination="RzO-9d-lvI" id="2YK-Lk-6F0"/>
+                        <outlet property="tableView" destination="UZa-H2-Y1k" id="UIX-QQ-445"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2jp-bg-85n" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="932" y="331"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="QLJ-jA-4f7">
             <objects>
-                <navigationController storyboardIdentifier="ShopNav" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="vhd-ub-Pec" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="ShopNav1" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="vhd-ub-Pec" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="W3e-xT-zbB">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <animations/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>

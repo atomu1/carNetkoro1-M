@@ -85,13 +85,16 @@ UITabBarControllerDelegate
     UINavigationController *homeNav = [homeSB instantiateViewControllerWithIdentifier:@"HomeNav"];
     
     UIStoryboard *shopSB = [UIStoryboard storyboardWithName:@"Shop" bundle:nil];
-    UINavigationController *shopCarNav = [shopSB instantiateViewControllerWithIdentifier:@"ShopNav"];
+    UINavigationController *shopCarNav = [shopSB instantiateViewControllerWithIdentifier:@"ShopNav1"];
     
 
     RequireListViewController *requireList = [[RequireListViewController alloc] init];
     UINavigationController *requireListNavi = [[UINavigationController alloc] initWithRootViewController:requireList];
-    UIStoryboard *myShopSB = [UIStoryboard storyboardWithName:@"MyShop" bundle:nil];
-    UINavigationController *orderNav = [myShopSB instantiateViewControllerWithIdentifier:@"MyShopNav"];
+    
+//    UIStoryboard *myShopSB = [UIStoryboard storyboardWithName:@"MyShop" bundle:nil];
+//    UINavigationController *orderNav = [myShopSB instantiateViewControllerWithIdentifier:@"MyShopNav"];
+    UIStoryboard *myShopSB = [UIStoryboard storyboardWithName:@"MyShopCartContr" bundle:nil];
+    UINavigationController *orderNav = [myShopSB instantiateViewControllerWithIdentifier:@"MyShopCarNav"];
     
     UIStoryboard *userSB = [UIStoryboard storyboardWithName:@"User" bundle:nil];
     UINavigationController *userNav = [userSB instantiateViewControllerWithIdentifier:@"UserNav"];

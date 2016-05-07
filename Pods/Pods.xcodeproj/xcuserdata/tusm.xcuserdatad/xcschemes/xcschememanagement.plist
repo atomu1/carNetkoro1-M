@@ -49,6 +49,11 @@
 			<key>orderHint</key>
 			<integer>9</integer>
 		</dict>
+		<key>SDCycleScrollView.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>13</integer>
+		</dict>
 		<key>SDWebImage.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -67,6 +72,16 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>129E4AD89DBE4954471C146B5C9D73D9</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>18A4BA8BFD66F76A5A3AE5290D46B994</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>42006C03FFA7481B646398109E851B59</key>
 		<dict>
 			<key>primary</key>
@@ -77,12 +92,32 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>5352D432641F0656C90741034E32F31E</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>550B482FAAABEAD464BE1BA4CFA6C8CC</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>55DBDD8B7D446F1D618F303A9FB53209</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>65600F8D718BE95F51C43734A37136C9</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>739C84F989A04F22DABBD2E55CD777BD</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>79D3AD0B196416F80B1119BD4E8BF184</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -97,7 +132,27 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>90361E7711E529F65C8C150D8F87CE9C</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>928353533005A4198EBDA5B700D37B64</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>9B5B4C5106C72D91D49E6762E61D1EAB</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>A510C1215068A9FEF6AE4C3A1050FE97</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>AE69BD65077C6E06330D6B628F1A1738</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -108,6 +163,21 @@
 			<true/>
 		</dict>
 		<key>B23B3D15FFC0FC9893968F478086D58D</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>B281DA29A9C3EDFB45BA53651F6BA611</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>C8B007A029BAE10EC2A09A97F1E2A4D7</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>E234618CF3AD5048D6E2D08772DE45D4</key>
 		<dict>
 			<key>primary</key>
 			<true/>

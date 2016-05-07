@@ -23,6 +23,7 @@
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
+@property (weak, nonatomic) UITabBarController *tabbarController;
 
 /**
  *  网络请求单例

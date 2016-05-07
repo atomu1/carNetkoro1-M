@@ -389,6 +389,7 @@
     PartsListContr *contr = (PartsListContr*)[CheckClassify instantiateViewControllerWithIdentifier:@"PartsListContr"];
     contr.UsrStoreId=UsrStoreId;
     contr.state=0;
+    [self setHidesBottomBarWhenPushed:YES];
     [self.navigationController pushViewController:contr animated:YES];
    
 }
@@ -398,6 +399,7 @@
     UIStoryboard *CheckClassify = [UIStoryboard storyboardWithName:@"CheckClassify" bundle:nil];
     CheckClassifyViewController *contr = (CheckClassifyViewController*)[CheckClassify instantiateViewControllerWithIdentifier:@"CheckClassifyViewController"];
     contr.StoreId=UsrStoreId;
+    [self setHidesBottomBarWhenPushed:YES];
     [self.navigationController pushViewController:contr animated:YES];
 }
 #pragma mark - 加入购物车
@@ -407,7 +409,8 @@
 #pragma mark - 立即购买
 - (IBAction)buyNowAction:(id)sender {
 //    [self.navigationController pushViewController:self.contr animated:YES];
-    [self presentViewController:self.contr animated:YES completion:^{
+    UINavigationController *nav=[[UINavigationController alloc]initWithRootViewController:self.contr];
+    [self presentViewController:nav animated:YES completion:^{
         
     }];
 }

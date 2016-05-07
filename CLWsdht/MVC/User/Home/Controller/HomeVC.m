@@ -248,6 +248,7 @@
 
 #pragma mark -我要买件
 - (IBAction)neederBtn:(UIButton *)sender {
+     ApplicationDelegate.tabbarController.selectedViewController=[self.tabBarController.viewControllers objectAtIndex:1];
 }
 
 #pragma mark -- 我的订单
@@ -264,6 +265,7 @@
 
 #pragma mark -- 我的需求
 - (IBAction)myNeed:(UIButton *)sender {
+     ApplicationDelegate.tabbarController.selectedViewController=[self.tabBarController.viewControllers objectAtIndex:2];
 
 }
 

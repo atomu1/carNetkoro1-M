@@ -257,6 +257,7 @@ CLLocationManagerDelegate,WXApiDelegate
     BaseTabBarController *tabVC = [[BaseTabBarController alloc] init];
     self.window.rootViewController = tabVC;
     [self.window makeKeyAndVisible];
+    self.tabbarController = tabVC;
     
     _endLocaltion=0;
     [self initProperty];

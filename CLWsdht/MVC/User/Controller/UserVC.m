@@ -14,6 +14,7 @@
 #import "UserAddressVC.h"
 #import "UserAccountManagerVC.h"
 #import "UserMsgVC.h"
+#import "LoginViewController.h"
 
 @interface UserVC ()<UITableViewDataSource,UITableViewDelegate>
 {
@@ -185,7 +186,7 @@
 //指定每个分区中有多少行，默认为1
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 4;
+    return 5;
     
 }
 /**
@@ -245,11 +246,18 @@
         }
         case 4://退出登录
         {
-            //            UserAddressVC * useraddress=[[UserAddressVC alloc]init];
-            //            UIViewController *useraddress = [self.storyboard instantiateViewControllerWithIdentifier:@"UserAddressVC"];
-            //            [self.navigationController pushViewController:useraddress animated:NO];
-            NSLog(@"退出登录没有实现！");//*********************************************************************************
+            [[NSUserDefaults standardUserDefaults]  removeObjectForKey:k_UD_username];
+            [[NSUserDefaults standardUserDefaults]  removeObjectForKey:k_UD_password];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+            ApplicationDelegate.isLogin = NO ;
+            UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Login" bundle:nil];
+            LoginViewController *vc = [sb instantiateViewControllerWithIdentifier:@"LoginViewController"];
+            vc.ifAllowAutoLogin = false;
+            self.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:vc animated:YES];
+            self.hidesBottomBarWhenPushed = NO;
             break;
+
         }
         default:
             break;

@@ -11,6 +11,7 @@
 #import "MaintainOrderViewController.h"
 #import "TardeCancelOrderViewController.h"
 #import "ReturnGoodsViewController.h"
+#import "SingleCase.h"
 
 @interface MyOrderViewController ()
 //维修订单
@@ -30,10 +31,54 @@
 @property (weak, nonatomic) IBOutlet UILabel *buyPartOrderSeven;//已交易
 @property (weak, nonatomic) IBOutlet UILabel *buyPartOrderEight;//退货申请
 
-
+@property (nonatomic, strong) NSString *userID;
 @end
 
 @implementation MyOrderViewController
+
+- (void)viewWillAppear:(BOOL)animated{
+    SingleCase *singleCase = [SingleCase sharedSingleCase];
+    _userID = singleCase.str;
+
+    [self UsrAggregate];
+}
+- (void)UsrAggregate{
+    [SVProgressHUD showWithStatus:k_Status_Load];
+    
+    NSString *urlStr = [NSString stringWithFormat:@"%@%@",BASEURL,@"Aggregate.asmx/UsrAggregate"];
+    NSDictionary *paramDict = @{
+                                @"id":_userID
+                                };
+    [ApplicationDelegate.httpManager POST:urlStr
+                               parameters:paramDict
+                                 progress:^(NSProgress * _Nonnull uploadProgress) {}
+                                  success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+                                      //http请求状态
+                                      if (task.state == NSURLSessionTaskStateCompleted) {
+                                          NSError* error;
+                                          NSDictionary* jsonDic = [NSJSONSerialization
+                                                                   JSONObjectWithData:responseObject
+                                                                   options:kNilOptions
+                                                                   error:&error];
+                                          NSString *status = [NSString stringWithFormat:@"%@",jsonDic[@"Success"]];
+                                          if ([status isEqualToString:@"1"]) {
+                                              //成功
+                                              NSLog(@"------------------%@", jsonDic);
+                                              [SVProgressHUD showSuccessWithStatus:  k_Success_Load];
+                                          } else {
+                                              //失败
+                                              [SVProgressHUD showErrorWithStatus:k_Error_WebViewError];
+                                              
+                                          }
+                                      } else {
+                                          [SVProgressHUD showErrorWithStatus:k_Error_Network];
+                                      }
+                                  } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+                                      //请求异常
+                                      [SVProgressHUD showErrorWithStatus:k_Error_Network];
+                                  }];
+
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];

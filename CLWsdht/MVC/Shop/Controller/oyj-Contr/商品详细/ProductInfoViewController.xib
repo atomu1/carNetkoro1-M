@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9060" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9532" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
@@ -266,26 +266,16 @@
                                 <action selector="addCartAction:" destination="-1" eventType="touchUpInside" id="jma-0K-ZG7"/>
                             </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QKt-51-bsY">
-                            <rect key="frame" x="103" y="9" width="32" height="30"/>
-                            <constraints>
-                                <constraint firstAttribute="width" constant="32" id="Ajt-Fi-sgu"/>
-                                <constraint firstAttribute="height" constant="30" id="Uxz-3J-Tb6"/>
-                            </constraints>
-                            <state key="normal" backgroundImage="tab_shop_car"/>
-                        </button>
                     </subviews>
                     <color key="backgroundColor" red="0.85769164360000005" green="0.85769164360000005" blue="0.85769164360000005" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstItem="m5i-fx-82w" firstAttribute="top" secondItem="XbP-hx-DdV" secondAttribute="top" id="7EN-GX-OQq"/>
                         <constraint firstAttribute="height" constant="50" id="ENd-un-1Qj"/>
-                        <constraint firstItem="QKt-51-bsY" firstAttribute="top" secondItem="XbP-hx-DdV" secondAttribute="top" constant="9" id="FOZ-q9-VgA"/>
                         <constraint firstItem="Crw-h9-it9" firstAttribute="top" secondItem="XbP-hx-DdV" secondAttribute="top" id="Lfb-Bu-LeC"/>
                         <constraint firstItem="Crw-h9-it9" firstAttribute="leading" secondItem="m5i-fx-82w" secondAttribute="trailing" id="ODf-hK-Cl8"/>
                         <constraint firstAttribute="trailing" secondItem="Crw-h9-it9" secondAttribute="trailing" id="VIp-uc-GsC"/>
                         <constraint firstAttribute="bottom" secondItem="m5i-fx-82w" secondAttribute="bottom" id="dnO-Xp-KJj"/>
                         <constraint firstAttribute="bottom" secondItem="Crw-h9-it9" secondAttribute="bottom" id="tK2-sG-RvF"/>
-                        <constraint firstItem="m5i-fx-82w" firstAttribute="leading" secondItem="QKt-51-bsY" secondAttribute="trailing" constant="14" id="zrK-t3-qlh"/>
                     </constraints>
                 </view>
             </subviews>
@@ -303,7 +293,4 @@
             <point key="canvasLocation" x="215.5" y="360.5"/>
         </view>
     </objects>
-    <resources>
-        <image name="tab_shop_car" width="18" height="18"/>
-    </resources>
 </document>

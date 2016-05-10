@@ -17,6 +17,7 @@
 #import "SingleCase.h"
 #import "ApplyReturnViewController.h"
 
+#define rowNum (NSInteger)((kScreen_Height - 100) / 96 + 1)
 
 @interface TheOrderViewController ()<UITableViewDataSource,UITableViewDelegate>
 
@@ -28,6 +29,14 @@
 @property (weak, nonatomic) IBOutlet UILabel *label3;
 @property (weak, nonatomic) IBOutlet UILabel *label4;
 @property (weak, nonatomic) IBOutlet UILabel *label5;
+
+/**
+ *  刷新
+ */
+@property (nonatomic, strong) NSMutableArray *modelArr;
+@property (nonatomic, strong) NSMutableArray *showModel;
+@property (nonatomic, assign) NSInteger times;
+@property (nonatomic, assign) NSInteger totalNum;
 
 @end
 
@@ -43,9 +52,16 @@
     _partlistArr = [[NSMutableArray alloc] initWithCapacity:0];
     SingleCase *singleCase = [SingleCase sharedSingleCase];
     _userId = singleCase.str;
+
+    _times  = 0;
+    self.showModel = [NSMutableArray arrayWithCapacity:0];
+    
+    [self GetOrderListByNetwork];
     [self setUpView];
     [self changLabel];
-    [self GetOrderListByNetwork];
+    [self setHeaderRefresh];
+    [self setFooterRefresh];
+
 }
 
 //UI界面
@@ -122,10 +138,71 @@
     [self GetOrderListByNetwork];
 }
 
+/**
+ *  上下拉刷新
+ */
+#pragma mark - 上拉刷新
+- (void)setHeaderRefresh {
+    
+    _orderTableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        _modelArr = [NSMutableArray arrayWithCapacity:0];
+        _showModel = [NSMutableArray arrayWithCapacity:0];
+        _totalNum = 0;
+        _times = 0;
+        [self GetOrderListByNetwork];
+        
+        [_orderTableView.mj_header beginRefreshing];
+        [_orderTableView reloadData];
+    }];
+}
+
+
+
+#pragma mark - 下拉加载
+- (void)setFooterRefresh {
+    _orderTableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+        
+        if (_totalNum >= 10&&_times == 1) {
+            [self GetOrderListByNetwork];
+        } else {
+            for (NSInteger i = _times * rowNum; i < _modelArr.count; i++) {
+                [_showModel addObject:_modelArr[i]];
+                if (i ==( (1 + _times) * rowNum) - 1) {
+                    break;
+                }
+            }
+            _times++;
+        }
+        if (_showModel.count == _modelArr.count) {
+            [SVProgressHUD showInfoWithStatus:@"没有更多可以加载了"];
+        }
+        [_orderTableView.mj_footer endRefreshing];
+        [_orderTableView reloadData];
+    }];
+}
+/**
+ *  刷新
+ */
+- (void)datprocessingWith:(NSMutableArray *)jsonArr {
+    for (NSInteger i = _times*rowNum; i < jsonArr.count; i ++) {
+        [_showModel addObject:jsonArr[i]];
+        if (i == ((1 + _times) * rowNum)-1) {
+            break;
+        }
+    }
+    _times ++;
+    
+    [_orderTableView reloadData];
+}
+
+
 //获取我的订单
 - (void)GetOrderListByNetwork{
     [SVProgressHUD showWithStatus:k_Status_Load];
-    
+    if (_totalNum == 0) {
+        _totalNum = 10;
+    }
+
     NSString *urlStr = [NSString stringWithFormat:@"%@%@",BASEURL,@"Usr.asmx/GetOrdersList"];
     NSDictionary *paramDict = @{
                                    @"state":_orderState,
@@ -133,7 +210,7 @@
                                 @"garageId":@"",
                                  @"storeId":@"",
                                    @"start":[NSString stringWithFormat:@"%d",0],
-                                   @"limit":[NSString stringWithFormat:@"%d",10]
+                                   @"limit":[NSString stringWithFormat:@"%ld", _totalNum]
                                 };
 
     
@@ -143,18 +220,18 @@
                                   success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
                                       //http请求状态
                                       if (task.state == NSURLSessionTaskStateCompleted) {
-                                          //            NSDictionary *jsonDic = [JYJSON dictionaryOrArrayWithJSONSData:responseObject];
                                           NSError* error;
                                           NSDictionary* jsonDic = [NSJSONSerialization
                                                                    JSONObjectWithData:responseObject
                                                                    options:kNilOptions
                                                                    error:&error];
-                                          if (jsonDic[@"Success"]) {
+                                          NSString *status = [NSString stringWithFormat:@"%@",jsonDic[@"Success"]];
+                                          if ([status isEqualToString:@"1"]) {
                                               //成功
                                               NSLog(@"------------------%@", jsonDic);
                                               OrderModel *orderModel = [[OrderModel alloc] init];
                                               _partlistArr = [orderModel assignModelWithDict:jsonDic];
-                                              [_orderTableView reloadData];
+                                              [self datprocessingWith:_partlistArr];
                                               if (_partlistArr.count == 0) {
                                                   [SVProgressHUD showErrorWithStatus:@"你还没有订单"];
                                               }else{
@@ -166,13 +243,14 @@
                                               [SVProgressHUD showErrorWithStatus:k_Error_WebViewError];
                                               
                                           }
-                                          
+                                          [_orderTableView.mj_header endRefreshing];
                                       } else {
                                           [SVProgressHUD showErrorWithStatus:k_Error_Network];
                                       }
-                                      
+                                      [_orderTableView.mj_header endRefreshing];
                                   } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
                                       //请求异常
+                                      [_orderTableView.mj_header endRefreshing];
                                       [SVProgressHUD showErrorWithStatus:k_Error_Network];
                                   }];
 
@@ -228,17 +306,19 @@
     [cancelButton setBackgroundColor:[UIColor redColor]];
     [cancelButton.titleLabel setFont:[UIFont systemFontOfSize:15]];
     [cancelButton setTitle:@"取消" forState:UIControlStateNormal];
+    [cancelButton setTag:section];
     [cancelButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [cancelButton setTitleColor:[UIColor lightGrayColor] forState:UIControlStateHighlighted];
-    //[button addTarget:self action:@selector(button:) forControlEvents:UIControlEventTouchUpInside];
+    [cancelButton addTarget:self action:@selector(cancelButton:) forControlEvents:UIControlEventTouchUpInside];
     //确认收货按钮
     UIButton *crnfirmButton = [[UIButton alloc] initWithFrame:CGRectMake(footerView.frame.size.width-95, footerView.frame.size.height-35, 80, 30)];
     [crnfirmButton setBackgroundColor:[UIColor redColor]];
     [crnfirmButton.titleLabel setFont:[UIFont systemFontOfSize:15]];
     [crnfirmButton setTitle:@"确认收货" forState:UIControlStateNormal];
+    [crnfirmButton setTag:section];
     [crnfirmButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [crnfirmButton setTitleColor:[UIColor lightGrayColor] forState:UIControlStateHighlighted];
-    //[button addTarget:self action:@selector(button:) forControlEvents:UIControlEventTouchUpInside];
+    [crnfirmButton addTarget:self action:@selector(crnfirmButton:) forControlEvents:UIControlEventTouchUpInside];
     //评价按钮
     UIButton *judgeButton = [[UIButton alloc] initWithFrame:CGRectMake(footerView.frame.size.width-80, footerView.frame.size.height-35, 65, 30)];
     [judgeButton setBackgroundColor:[UIColor redColor]];
@@ -287,17 +367,21 @@
     if ([state isEqualToString:@"0"]) {
         [footerView addSubview:cancelButton];
         [footerView addSubview:storeOK];
-}
-    else if ([state isEqualToString:@"1"]){
+    }
+    //根据当前状态显示订单按钮
+    if ([_orderState isEqualToString:@"0"]) {
+        [footerView addSubview:cancelButton];
+    }
+    else if ([_orderState isEqualToString:@"1"]){
         [footerView addSubview:cancelButton];
         [footerView addSubview:payButton];
     }
-    else if ([state isEqualToString:@"2"]){
+    else if ([_orderState isEqualToString:@"2"]){
     }
-    else if ([state isEqualToString:@"3"]){
+    else if ([_orderState isEqualToString:@"3"]){
         [footerView addSubview:crnfirmButton];
     }
-    else if ([state isEqualToString:@"4"]){
+    else if ([_orderState isEqualToString:@"4"]){
         [footerView addSubview:judgeButton];
         [footerView addSubview:returnButton];
     }
@@ -341,6 +425,97 @@
     [carveS setBackgroundColor:[UIColor lightGrayColor]];
     [footerView addSubview:carveS];
     return footerView;
+}
+
+#pragma mark -- 取消订单按钮
+/**
+ *  取消
+ */
+- (void)cancelButton:(UIButton *)btn{
+    [SVProgressHUD showWithStatus:k_Status_Load];
+    OrderModel *OM = [[OrderModel alloc] init];
+    OM = _partlistArr[btn.tag];
+    
+    NSString *urlStr = [NSString stringWithFormat:@"%@%@",BASEURL,@"Usr.asmx/CancelPartsOrders"];
+    NSDictionary *paramDict = @{
+                                @"ordersId":OM.Id,
+                                };
+    
+    
+    [ApplicationDelegate.httpManager POST:urlStr
+                               parameters:paramDict
+                                 progress:^(NSProgress * _Nonnull uploadProgress) {}
+                                  success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+                                      //http请求状态
+                                      if (task.state == NSURLSessionTaskStateCompleted) {
+                                          NSError* error;
+                                          NSDictionary* jsonDic = [NSJSONSerialization
+                                                                   JSONObjectWithData:responseObject
+                                                                   options:kNilOptions
+                                                                   error:&error];
+                                          NSString *status = [NSString stringWithFormat:@"%@",jsonDic[@"Success"]];
+                                          if ([status isEqualToString:@"1"]) {
+                                              //成功
+                                              NSLog(@"------------------%@", jsonDic);
+                                              [self GetOrderListByNetwork];
+                                              [SVProgressHUD showSuccessWithStatus:@"取消成功"];
+                                              
+                                          } else {
+                                              //失败
+                                              [SVProgressHUD showErrorWithStatus:k_Error_WebViewError];
+                                              
+                                          }
+                                      } else {
+                                          [SVProgressHUD showErrorWithStatus:k_Error_Network];
+                                      }
+                                  } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+                                      //请求异常
+                                      [SVProgressHUD showErrorWithStatus:k_Error_Network];
+                                  }];
+    
+}
+/**
+ *  确认收货
+ */
+- (void)crnfirmButton:(UIButton *)btn{
+    [SVProgressHUD showWithStatus:k_Status_Load];
+    OrderModel *OM = [[OrderModel alloc] init];
+    OM = _partlistArr[btn.tag];
+    
+    NSString *urlStr = [NSString stringWithFormat:@"%@%@",BASEURL,@"Usr.asmx/Receipt"];
+    NSDictionary *paramDict = @{
+                                @"ordersId":OM.Id,
+                                };
+        [ApplicationDelegate.httpManager POST:urlStr
+                               parameters:paramDict
+                                 progress:^(NSProgress * _Nonnull uploadProgress) {}
+                                  success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+                                      //http请求状态
+                                      if (task.state == NSURLSessionTaskStateCompleted) {
+                                          NSError* error;
+                                          NSDictionary* jsonDic = [NSJSONSerialization
+                                                                   JSONObjectWithData:responseObject
+                                                                   options:kNilOptions
+                                                                   error:&error];
+                                          NSString *status = [NSString stringWithFormat:@"%@",jsonDic[@"Success"]];
+                                          if ([status isEqualToString:@"1"]) {
+                                              //成功
+                                              NSLog(@"------------------%@", jsonDic);
+                                              [self GetOrderListByNetwork];
+                                              [SVProgressHUD showSuccessWithStatus:@"确认成功"];
+                                              
+                                          } else {
+                                              //失败
+                                              [SVProgressHUD showErrorWithStatus:k_Error_WebViewError];
+                                              
+                                          }
+                                      } else {
+                                          [SVProgressHUD showErrorWithStatus:k_Error_Network];
+                                      }
+                                  } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+                                      //请求异常
+                                      [SVProgressHUD showErrorWithStatus:k_Error_Network];
+                                  }];
 }
 
 //返回某个section中rows的个数

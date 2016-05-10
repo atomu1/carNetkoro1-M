@@ -41,7 +41,13 @@
             goodModel.Cnt=[dic3 objectForKey:@"Cnt"];
             goodModel.Url=[dic3 objectForKey:@"Url"];
             goodModel.Name = [dic3 objectForKey:@"Name"];
+            goodModel.Id = [dic3 objectForKey:@"Id"];
+            goodModel.Img = [dic3 objectForKey:@"Img"];
+            goodModel.StoreId = [dic3 objectForKey:@"StoreId"];
+            goodModel.StoreName = [dic3 objectForKey:@"StoreName"];
+            goodModel.PartsId = [dic3 objectForKey:@"PartsId"];
             goodModel.Price = [dic3 objectForKey:@"Price"];
+            goodModel.CurrentPrice = [dic3 objectForKey:@"CurrentPrice"];
             [subarr addObject:goodModel];
         }
         maintainModel.PartsList=subarr;

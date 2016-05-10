@@ -9,10 +9,11 @@
 #import "BaseViewController.h"
 #import "GoodInfoData.h"
 #import "GarageModal.h"
-
+#import "CarModal.h"
 @interface BuyNowController : BaseViewController
 //选择“我的”地址
 @property(strong,nonatomic)GoodInfoData *goodInfo;
+@property(strong,nonatomic)CarModal *carModel;
 @property(strong,nonatomic)NSDictionary *selectAddressDic;
 
 //选择发到修配厂地址1还是用户自己地址0

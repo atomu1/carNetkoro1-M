@@ -1554,6 +1554,7 @@
 		29CD63341CD98F91002B4DF4 /* 立即购买 */ = {
 			isa = PBXGroup;
 			children = (
+				98D478C51CC736B000F09464 /* ReleaseOrderVC */,
 				292F0F201CDB7A310039D403 /* 修配厂列表页 */,
 				29A038851CDAF0D50026A1C3 /* 地址选择页 */,
 				29CD63351CD98F91002B4DF4 /* BuyNowController.h */,
@@ -2161,6 +2162,7 @@
 				987C82D01CCE0D1400117E03 /* ReleaseTableViewCell.xib */,
 			);
 			name = ReleaseOrderVC;
+			path = ../../../../../User/Home/Controller;
 			sourceTree = "<group>";
 		};
 		98E8C15C1C49E50800310091 = {
@@ -2693,7 +2695,6 @@
 			isa = PBXGroup;
 			children = (
 				582C61CB1CD4550800435FF4 /* CarDemandPage */,
-				98D478C51CC736B000F09464 /* ReleaseOrderVC */,
 				98D478C41CC734BF00F09464 /* OrderVC */,
 				DF0991741C55F676001B6F2D /* HomeVC.h */,
 				DF0991751C55F676001B6F2D /* HomeVC.m */,
@@ -2794,7 +2795,7 @@
 				TargetAttributes = {
 					98E8C1641C49E50800310091 = {
 						CreatedOnToolsVersion = 7.0;
-						DevelopmentTeam = 342NRWFB6A;
+						DevelopmentTeam = QNYGZ6JJ24;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -3333,7 +3334,7 @@
 					"$(PROJECT_DIR)/CLWsdht/Lib/第三方支付/ShareSDK/Extend/SinaWeiboSDK",
 					"$(PROJECT_DIR)/CLWsdht/Lib/第三方支付/ShareSDK/Extend/WeChatSDK",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.YYSD.YYSD;
+				PRODUCT_BUNDLE_IDENTIFIER = com.sdht.CLWusr;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};
@@ -3392,7 +3393,7 @@
 					"$(PROJECT_DIR)/CLWsdht/Lib/第三方支付/ShareSDK/Extend/SinaWeiboSDK",
 					"$(PROJECT_DIR)/CLWsdht/Lib/第三方支付/ShareSDK/Extend/WeChatSDK",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.YYSD.YYSD;
+				PRODUCT_BUNDLE_IDENTIFIER = com.sdht.CLWusr;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};

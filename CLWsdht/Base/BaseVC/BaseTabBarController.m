@@ -127,7 +127,7 @@ UITabBarControllerDelegate
     UITabBarItem *item5 = self.tabBar.items[2];
     item5.tag = 2;
     item5.title = @"我的需求";
-    
+    item5.image = [UIImage imageNamed:@"jiahao"];
     
     UITabBarItem *item3 = self.tabBar.items[3];
     item3.tag = 3;

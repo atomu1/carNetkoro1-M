@@ -84,7 +84,8 @@
                                                                    JSONObjectWithData:responseObject
                                                                    options:kNilOptions
                                                                    error:&error];
-                                          if (jsonDic[@"Success"]) {
+                                          NSString *status = [NSString stringWithFormat:@"%@",jsonDic[@"Success"]];
+                                          if ([status isEqualToString:@"1"]) {
                                               //成功
                                               NSLog(@"------------------%@", jsonDic);
                                               OrderModel *orderModel = [[OrderModel alloc] init];

@@ -12,6 +12,7 @@
 #import "TardeCancelOrderViewController.h"
 #import "ReturnGoodsViewController.h"
 #import "SingleCase.h"
+#import "NSJSON+YBClass.h"
 
 @interface MyOrderViewController ()
 //维修订单
@@ -64,6 +65,7 @@
                                           if ([status isEqualToString:@"1"]) {
                                               //成功
                                               NSLog(@"------------------%@", jsonDic);
+                                              [self changeCorner:jsonDic];
                                               [SVProgressHUD showSuccessWithStatus:  k_Success_Load];
                                           } else {
                                               //失败
@@ -112,6 +114,28 @@
     [_buyPartOrderEight.layer setMasksToBounds:YES];
     [_buyPartOrderEight.layer setCornerRadius:11];
 
+}
+
+- (void)changeCorner:(NSDictionary *)dict
+{
+    NSString *str1 = [[NSString alloc] init];
+    str1 = [dict objectForKey:@"Data"];
+
+    NSDictionary* dic1 = [NSDictionary dictWithJSON:str1];
+    _maintainOrderFirth.text = [NSString stringWithFormat:@"%@",[dic1 objectForKey:@"GOrder01"]];
+    _maintainOrderSecond.text = [NSString stringWithFormat:@"%@",[dic1 objectForKey:@"GOrder2"]];
+    _maintainOrderThird.text = [NSString stringWithFormat:@"%@",[dic1 objectForKey:@"GOrder3"]];
+    _maintainOrderFourth.text = [NSString stringWithFormat:@"%@",[dic1 objectForKey:@"GOrder100"]];
+    _maintainOrderFifth.text = [NSString stringWithFormat:@"%@",[dic1 objectForKey:@"GOrderCancel"]];
+    
+    _buyPartOrderFirst.text = [NSString stringWithFormat:@"%@",[dic1 objectForKey:@"POrder0"]];
+    _buyPartOrderSecond.text = [NSString stringWithFormat:@"%@",[dic1 objectForKey:@"POrder1"]];
+    _buyPartOrderTirth.text = [NSString stringWithFormat:@"%@",[dic1 objectForKey:@"POrder2"]];
+    _buyPartOrderFourth.text = [NSString stringWithFormat:@"%@",[dic1 objectForKey:@"POrder3"]];
+    _buyPartOrderFifth.text = [NSString stringWithFormat:@"%@",[dic1 objectForKey:@"POrder4"]];
+    _buyPartOrderSixth.text = [NSString stringWithFormat:@"%@",[dic1 objectForKey:@"POrder100"]];
+    _buyPartOrderSeven.text = [NSString stringWithFormat:@"%@",[dic1 objectForKey:@"POrderCancel"]];
+    _buyPartOrderEight.text = [NSString stringWithFormat:@"%@",[dic1 objectForKey:@"POrderRefund"]];
 }
 
 - (void)didReceiveMemoryWarning {

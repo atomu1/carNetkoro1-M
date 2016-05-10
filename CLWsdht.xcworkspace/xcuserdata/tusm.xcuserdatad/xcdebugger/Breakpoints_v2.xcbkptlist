@@ -17,38 +17,6 @@
             endingLineNumber = "248"
             landmarkName = "-postUserInfoToNetwork"
             landmarkType = "5">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[UserInforViewController postUserInfoToNetwork]"
-                  moduleName = "CLWsdht"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/tusm/Desktop/carNetkoro1-master/CLWsdht/MVC/Login/Controller/UserInforViewController.m"
-                  timestampString = "484486444.09891"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "248"
-                  endingLineNumber = "248"
-                  offsetFromSymbolStart = "1064">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__48-[UserInforViewController postUserInfoToNetwork]_block_invoke"
-                  moduleName = "CLWsdht"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/tusm/Desktop/carNetkoro1-master/CLWsdht/MVC/Login/Controller/UserInforViewController.m"
-                  timestampString = "484486444.099218"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "248"
-                  endingLineNumber = "248"
-                  offsetFromSymbolStart = "48">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
